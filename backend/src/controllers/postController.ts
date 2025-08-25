@@ -19,6 +19,31 @@ export const getPosts = async(req: Request, res: Response): Promise<void> => {
   }
 }
 
+// 특정 게시글 조회
+export const getPost = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const post = await Post.findById(req.params.id);
+    
+    if (!post) {
+      res.status(404).json({
+        success: false,
+        message: '게시글을 찾을 수 없습니다.'
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: post
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: '게시글을 불러오는데 실패했습니다.',
+    });
+  }
+};
+
 // 게시글 작성 
 export const createPost = async(req: Request, res: Response): Promise<void> => {
   try {
