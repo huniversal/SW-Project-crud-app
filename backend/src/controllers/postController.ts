@@ -44,3 +44,33 @@ export const createPost = async(req: Request, res: Response): Promise<void> => {
     })
   }
 }
+
+// 게시글 수정
+export const updatePost = async(req: Request, res: Response): Promise<void> => {
+  try {
+    const { title, content } = req.body;
+
+    const post = await Post.findByIdAndUpdate(
+      req.params.id,
+      {title, content},
+      { new: true, runValidators: true }
+    )
+    if(!post) {
+      res.status(404).json({
+        success: false, 
+        message: "게시글을 찾을 수 없습니다.",
+      })
+      return;
+    }
+    res.status(200).json({
+      success: true, 
+      message: "게시글이 성공적으로 수정되었습니다.",
+      data: post
+    })
+  } catch(err){
+    res.status(500).json({
+      success: false, 
+      message: "서버 오류로 게시글 수정에 실패했습니다."
+    })
+  }
+}
