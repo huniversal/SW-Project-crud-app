@@ -18,3 +18,29 @@ export const getPosts = async(req: Request, res: Response): Promise<void> => {
     })
   }
 }
+
+// 게시글 작성 
+export const createPost = async(req: Request, res: Response): Promise<void> => {
+  try {
+    const {title, content} = req.body;
+    if(!title || !content) {
+      res.status(400).json({
+        success: false, 
+        message: "제목과 내용을 모두 입력해주세요."
+      })
+      return;
+    }
+    const post = await Post.create({title, content});
+
+    res.status(201).json({
+      success: true, 
+      message: '게시글이 성공적으로 작성되었습니다.',
+      data: post
+    })
+  } catch(err){
+    res.status(500).json({
+      success: false, 
+      message: "서버 오류로 게시글 작성에 실패했습니다."
+    })
+  }
+}
