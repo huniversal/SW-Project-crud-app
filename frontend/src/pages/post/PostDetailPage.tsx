@@ -28,11 +28,29 @@ const PostDetailPage = () => {
     fetchPost();
   }, [id, navigate]);
 
+  // 게시글 삭제 
+  const handleDelete = async() => {
+    if(!post) return;
+
+    try {
+      const res = await postService.deletePost(post._id);
+      if(res.success) {
+        alert("게시글이 성공적으로 삭제되었습니다.");
+        navigate('/posts');
+      } else {
+        alert("게시글 삭제에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch(err) {
+      console.error("에러발생 :", err);
+      alert("게시글 삭제 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  }
+
   if(!post) {
     return <div>로딩...</div>
   }
   return (
-<div>
+    <div>
       <div style={{ marginBottom: '20px' }}>
         <Link to="/posts">← 목록으로 돌아가기</Link>
       </div>
@@ -63,7 +81,7 @@ const PostDetailPage = () => {
         <button onClick={() => navigate(`/posts/${post._id}/edit`)} style={{ marginRight: '10px' }}>
           수정
         </button>
-        <button onClick={() => {/* 삭제 기능은 나중에 구현 */}}>
+        <button onClick={handleDelete}>
           삭제
         </button>
       </div>
