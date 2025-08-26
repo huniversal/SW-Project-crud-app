@@ -37,7 +37,11 @@ const PostListPage = () => {
         <tbody>
           {posts.map(post => (
             <tr key={post._id}>
-              <td>{post.title}</td>
+              <td>              
+                <Link to={`/posts/${post._id}`} style={{ textDecoration: 'none', color: '#333' }}>
+                  {post.title}
+                </Link>
+              </td>
               <td>{new Date(post.createdAt).toLocaleDateString()}</td>
             </tr>
           ))}
