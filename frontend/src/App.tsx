@@ -1,11 +1,43 @@
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import PostListPage from './pages/post/PostListPage';
+import PostCreatePage from './pages/post/PostCreatePage';
+import PostDetailPage from './pages/post/PostDetailPage';
+import PostEditPage from './pages/post/PostEditPage';
+
+// 홈 페이지 컴포넌트 생성
+const HomePage = () => {
+  return (
+    <div>
+      <h2>홈페이지</h2>
+      <Link to="/posts">게시판 보기</Link>
+    </div>
+  );
+};
 
 function App() {
   return (
-    <>
-    안녕하세요
-    </>
-  )
+    <Router>
+      <div>
+        <h1>게시판</h1>
+        
+        {/* 네비게이션 메뉴 */}
+        <nav style={{ marginBottom: '20px' }}>
+          <Link to="/" style={{ marginRight: '10px' }}>홈</Link>
+          <Link to="/posts">게시글 목록</Link>
+          <Link to="/posts/create">게시글 작성</Link>
+        </nav>
+        
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/posts" element={<PostListPage />} />
+          <Route path="/posts/create" element={<PostCreatePage />} />
+          <Route path="/posts/:id" element={<PostDetailPage />} />
+          <Route path="/posts/:id/edit" element={<PostEditPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

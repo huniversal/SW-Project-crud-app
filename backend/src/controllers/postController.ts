@@ -103,7 +103,7 @@ export const updatePost = async(req: Request, res: Response): Promise<void> => {
 // 게시글 삭제
 export const deletePost = async(req: Request, res: Response): Promise<void> => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.id);
+    const post = await Post.findByIdAndDelete(req.params.id);
     if(!post){
       res.status(404).json({
         success: false, 

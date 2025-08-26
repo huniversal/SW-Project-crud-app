@@ -10,13 +10,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// 라우트 설정
-app.use('/api/posts', postRoutes);
 
 // 미들웨어 설정
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+// 라우트 설정
+app.use('/api/posts', postRoutes);
 
 // 기본 라우트 
 app.get('/', (req, res) => {
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 })
 
 // 헬스 체크 라우트
-app.get('api/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
     message: '서버 정상 작동', 
