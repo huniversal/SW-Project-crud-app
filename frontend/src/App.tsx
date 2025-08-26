@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import PostListPage from './pages/post/PostListPage';
 import PostCreatePage from './pages/post/PostCreatePage';
 import PostDetailPage from './pages/post/PostDetailPage';
+import PostEditPage from './pages/post/PostEditPage';
 
 // 홈 페이지 컴포넌트 생성
 const HomePage = () => {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/posts" element={<PostListPage />} />
           <Route path="/posts/create" element={<PostCreatePage />} />
           <Route path="/posts/:id" element={<PostDetailPage />} />
+          <Route path="/posts/:id/edit" element={<PostEditPage />} />
         </Routes>
       </div>
     </Router>
