@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import { postService } from '../../services/postService'
 import type { Post } from '../../types/index'
 
@@ -19,7 +20,12 @@ const PostListPage = () => {
   }, [])
   return (
     <div>
-      <h2>게시글 목록</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h2>게시글 목록</h2>
+        <Link to="/posts/create">
+          <button>게시글 작성</button>
+        </Link>
+      </div>
       
       <table style={{ width: '100%', marginTop: '20px' }}>
         <thead>
